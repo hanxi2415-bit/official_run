@@ -3,5 +3,6 @@
 __pycache__/
 .ipynb_checkpoints/
 raw_data/
+cleaned_raw_data/
 qlib_data/
 *.bin
