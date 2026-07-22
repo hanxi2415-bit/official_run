@@ -7,3 +7,8 @@ raw_data/
 cleaned_raw_data/
 qlib_data/
 *.bin
+*.pyc
+venv/
+mlruns/
+*.pkl
+*.h5
