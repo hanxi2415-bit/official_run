@@ -3,6 +3,8 @@ Data reading and cleaning (unit adjustment) for the multi-stock pipeline.
 """
 
 import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 from pathlib import Path
  
 import mysql.connector

@@ -3,17 +3,20 @@
 Model definitions and parameter tuning
 getting the final prediction
 """
+
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
  
 import numpy as np
 import pandas as pd
-
-import torch
-import torch.nn as nn
 
 from sklearn.linear_model import Ridge
 from sklearn.neural_network import MLPRegressor
 
 import lightgbm as lgb
+
+import torch
+import torch.nn as nn
  
 from pipeline.evaluate import evaluate_predictions
 from pipeline.partition import build_sequences
@@ -61,7 +64,7 @@ def implement_ridge(
     preds = final_model.predict(X_test)
     matrix = evaluate_predictions(preds, y_test)
 
-    return matrix
+    return preds, matrix
 
 
 
@@ -153,7 +156,7 @@ def implement_lgb(
 
     preds = lgb_model.predict(X_test, num_iteration = lgb_model.best_iteration)
     matrix = evaluate_predictions(preds, y_test) 
-    return matrix
+    return preds, matrix
 
 
 #### MLP
@@ -216,7 +219,7 @@ def implement_mlp(
 
     preds = mlp_model.predict(X_test) 
     matrix = evaluate_predictions(preds, y_test) 
-    return matrix
+    return preds, matrix
 
 
 # random seed stability test MLP

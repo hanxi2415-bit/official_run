@@ -2,6 +2,9 @@
 prediction evaluation and confusion matrix 
 """
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 
 import numpy as np
 import pandas as pd
@@ -99,11 +102,12 @@ def walk_forward_evaluate(
         fold_results.append(matrix)
  
         print(f"Fold {i}: test={split[2]}, rank_ic={matrix['rank_ic']:.5f}")
-    
-    print(f"\nMean rank_ic across folds: {fold_results['rank_ic'].mean():.5f}")
-    print(f"Std rank_ic across folds: {fold_results['rank_ic'].std():.5f}")
+
+    fold_df = pd.DataFrame(fold_results)
+    print(f"\nMean rank_ic across folds: {fold_df['rank_ic'].mean():.5f}")
+    print(f"Std rank_ic across folds: {fold_df['rank_ic'].std():.5f}")
  
-    return pd.DataFrame(fold_results)[["fold", "test_period_until", "mse", "mae", "pearson", "rank_ic"]]
+    return pd.DataFrame(fold_results)[["fold", "test_period_until", "mse", "mae", "pearson corr", "rank_ic"]]
 
 
 #### cross model comnparison table 
@@ -115,7 +119,7 @@ def compare_models(combined_fold_results: dict[str, pd.DataFrame]) -> pd.DataFra
     rows = []
     for name, df in combined_fold_results.items():
         row = {"model": name}
-        for col in ["mse", "mae", "pearson", "rank_ic"]:
+        for col in ["mse", "mae", "pearson corr", "rank_ic"]:
             row[f"{col}_mean"] = df[col].mean()
             row[f"{col}_std"] = df[col].std()
         rows.append(row)

@@ -2,6 +2,9 @@
 feature construction
 """
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import pandas as pd
 import numpy as np
  
