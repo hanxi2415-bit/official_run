@@ -1,0 +1,10 @@
+jupyter
+lightgbm
+matplotlib
+mysql-connector-python
+numpy
+optuna
+pandas
+pyqlib
+scikit-learn
+torch
