@@ -86,12 +86,17 @@ def build_sequences(X: pd.DataFrame, y: pd.Series, seq_len: int):
     Build sliding-window sequences per instrument for sequence models (LSTM).
     Returns (X_seq, y_seq) as numpy arrays.
     """
-    X_seq, y_seq = [], []
+    X_seq, y_seq, dates_seq, codes_seq = [], [], [], []
     for instrument, group in X.groupby("instrument"):
         vals = group.values
         y_vals = y.loc[group.index].values
+        dates = group.index.get_level_values("datetime").values
+
         for i in range(seq_len, len(vals)):
             X_seq.append(vals[i - seq_len:i])
             y_seq.append(y_vals[i])
-    return np.array(X_seq), np.array(y_seq)
+            dates_seq.append(dates[i])
+            codes_seq.append(instrument)
+
+    return np.array(X_seq), np.array(y_seq), np.array(dates_seq), np.array(codes_seq)
 
