@@ -40,7 +40,8 @@ This project explores stock return prediction using a progressively escalating s
     - Model Stability Analysis (Seed sensitivity analysis to check consistency of results across random initializations)
     - Comparison of ensembling versus single-model selection
     - Hyperparameter tuning via Optuna
-    - Evaluation Metrics:
+    - Evaluation Metrics
+    - portfolio building and backtesting
 
 Models are compared using:
 
@@ -64,8 +65,6 @@ PyTorch
 Optuna for hyperparameter tuning
 
 
-Next Steps:
-
-Portfolio-level backtest using Ridge as the stable baseline model
 
 - Notes: This is an internship project. Data files are not included in this repository.
+- Notes: LSTM has results are not presented due to local enviroment constraints
