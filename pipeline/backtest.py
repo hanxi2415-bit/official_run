@@ -2,6 +2,10 @@
 import pandas as pd
 
 def get_return_top_stocks(k: int, preds, y_actual):
+    '''
+    get the top k stocks according to pred and long 
+    protifolio weightage determined by ranking
+    '''
     pred_return = []
     weight_norm = sum(range(1, k + 1))  # normalizer for rank weights: k+(k-1)+...+1
 
@@ -25,7 +29,10 @@ def get_return_top_stocks(k: int, preds, y_actual):
 
 
 
-def get_benchmark(y_actual):
+def get_benchmark(y_actual): 
+    """
+    all indeces with even wieght
+    """
     benchmark = []
 
     for date, act_return in y_actual.groupby('datetime'):
@@ -36,7 +43,10 @@ def get_benchmark(y_actual):
 
 
 def compare_res(pred_return, benchmark, init_val: int = 1):
-
+    """
+    compare results of the protfolio (pred_return) and the benchmark
+    return the accumulated gain of both stategies
+    """
     pred_return = pred_return.sort_values('date')
     benchmark = benchmark.sort_values('date')
 
