@@ -30,3 +30,15 @@ def plot_actual_vs_predicted(y_true: pd.Series, preds, title: str = "Actual vs P
     plt.legend()
     plt.tight_layout()
     plt.show()
+
+def plot_vs_benchmark(date, est_gain_series, bench_gain_series, title: str = 'Portfolio vs Benchmark Cumulative Return'):
+    plt.figure(figsize=(10, 5))
+    plt.plot(date, est_gain_series, label='top-k portfolio')
+    plt.plot(date, bench_gain_series, label='Benchmark (equal-weight)')
+    plt.xlabel('Date')
+    plt.ylabel('Cumulative growth')
+    plt.title(title)
+    plt.legend()
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
