@@ -12,3 +12,4 @@ venv/
 mlruns/
 *.pkl
 *.h5
+*.parquet
